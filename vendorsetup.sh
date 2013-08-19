@@ -1,0 +1,2 @@
+add_lunch_combo cm_aurora-userdebug
+add_lunch_combo cm_aurora-eng

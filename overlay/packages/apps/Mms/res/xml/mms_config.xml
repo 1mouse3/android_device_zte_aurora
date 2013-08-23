@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mms_config version="4">
     <bool name="enabledMMS">true</bool>
+    <bool name="enabledTransID">true</bool>
     <int name="maxMessageSize">512000</int>
-    <int name="maxImageHeight">480</int>
-    <int name="maxImageWidth">640</int>
-    <int name="defaultSMSMessagesPerThread">500</int>
-    <int name="defaultMMSMessagesPerThread">50</int>
-    <int name="minMessageCountPerThread">10</int>
-    <int name="maxMessageCountPerThread">5000</int>
-    <string name="uaProfUrl">http://device.sprintpcs.com/ZTE/N9100-BOOST/N9100V1.0.0B09.rdf</string>
-    <int name="recipientLimit">10</int>
-    <int name="mmsRecipientLimit">10</int>
-    <int name="smsRecipientLimit">10</int>
-    <int name="smsToMmsTextThreshold">2</int>
-    <int name="maxSubjectLength">100</int>
+    <int name="maxImageHeight">960</int>
+    <int name="maxImageWidth">1280</int>
+    <int name="maxVideoHeight">240</int>
+    <int name="maxVideoWidth">320</int>
+    <!-- If true, The text message over 160 characters will be sent in multi part.
+         If false, The text message over 160 characters will be sent
+         via multi media message. -->
     <bool name="enableMultipartSMS">true</bool>
-    <bool name="enableSlideDuration">true</bool>
-    <int name="maxMessageTextSize">1000</int>
-    <string name="emailGatewayNumber">6245</string>
-    <string name="OPERATOR">Boost Mobile</string>
-    <string name="mmsMMSC">>http://mm.myboostmobile.com</string>
-    <bool name="MetroPCS_enableCharacterCounter">true</bool>
-    <bool name="enableCmasInSms">true</bool>
-    <bool name="enableInsertContactMenu">true</bool>
-    <bool name="enableContactButton">true</bool>
-    <bool name="enableUnreadIndicator">true</bool>
-    <bool name="enableSelectItems">true</bool>
-    <bool name="enableShowSendPicture">true</bool>
-    <bool name="enableMifavorComposeMessageUi">true</bool>
-    <bool name="enableShowMmsEditSize">true</bool>
-    <bool name="enableShareVcardViaMms">true</bool>
-    <bool name="enableMMSAudioSelectFromSDCard">true</bool>
-    <bool name="enableShareVcalendarViaMms">true</bool>
-    <bool name="enableJoyn">true</bool>
-    <bool name="enableMMSReadReports">false</bool>
+
+    <!-- If true, the text message will be split every 160 characters.
+         If false, the text will never be split before being sent. -->
+    <bool name="enableSplitSMS">true</bool>
+
+    <string name="uaProfTagName">Profile</string>
+    <string name="userAgent">LG-MS770/Android-mms\u0020</string>
+    <string name="uaProfUrl">http://uaprof.metropcs.net/UAProf/LG-MS770.xml</string>
+    <!-- Setting for MetroPCS MMS -->
+    <string name="httpParams">x-up-calling-line-id: 1##LINE1##|X-VzW-MDN: 1##LINE1##</string>
+
+    <!-- Setting for MetroPCS MMS -->
+    <string name="httpParamsLine1Key">##LINE1##</string>
 </mms_config>

@@ -1,60 +1,22 @@
 #
-# system.prop for aurora
+# system.prop for l0
 #
-
-dalvik.vm.dexopt-data-only=1
 rild.libpath=/system/lib/libril-qc-qmi-1.so
-rild.libargs=-d /dev/ttyS0
-ro.sf.lcd_density=320
-ro.lcd_min_brightness=20
-telephony.lteOnCdmaDevice=1
-ro.cdma.subscribe_on_ruim_ready=true
-ril.subscription.types=RUIM,NV
-#DEVICE_PROVISIONED=1
-persist.radio.no_wait_for_card=0
-ro.hdcp2.rx=tz
-
-#
-# system props for the data modules
-#
-ro.use_data_netmgrd=true
-persist.data_netmgrd_nint=16
-
-#
-# Needed to match behavior of stock rom
-# D/PHONE: mDoesRilSendMultipleCallRing=false
-#
-ro.telephony.call_ring.multiple=0
-
-# Fields for custom RIL
-# MAX PROP NAME is 31 chars --|
-gsm.sim.operator.alpha = sprint
-gsm.sim.operator.numeric = 310120
-gsm.sim.operator.iso-country = us
-gsm.operator.alpha = sprint
-gsm.operator.numeric = 310120
-gsm.operator.iso-country = us
-ro.cdma.home.operator.numeric=310120
-ro.cdma.home.operator.alpha=Sprint
+rild.libargs=-d /dev/smd0
+ro.telephony.ril_class=ZTEQualcommUiccRIL
+ro.telephony.ril.v3=qcomuiccstack
+ro.vendor.extension_library=/system/lib/libqc-opt.so
+ro.baseband.arch=msm
+ro.config.lte=true
 ro.telephony.default_network=8
-keyguard.no_require_sim=true
+telephony.lteOnCdmaDevice=1
+telephony.lteOnGsmDevice=1
+ro.ril.shutdown=true
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+ro.config.ehrpd=true
 ro.config.svlte1x=true
-telephony.sms.pseudo_multipart=1
-
-# System property for SIM
-persist.radio.apm_sim_not_pwdn=0
-
-# System property for sys info indication
-#persist.radio.add_power_save=1
-
-# System propverty snapshot disable
-persist.radio.snapshot_disabled=1
-
-# Default ECCList (Except USCC)
-ro.ril.ecclist=112,911,#911,*911
-
-# Support Global Mode (Global Mode project)
-#ro.config.multimode_cdma=1
+ro.cdma.subscribe_on_ruim_ready=true
 
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
@@ -65,41 +27,20 @@ persist.rild.nitz_short_ons_0=
 persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
-
-
-
-
-ro.telephony.ril_class=QualcommSharedRIL
-ro.telephony.ril.v3=subscriptionFromSource,skipCdmaSubcription,icccardstatus,qcomuiccstack
+#ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
 debug.sf.hw=1
 debug.egl.hw=1
 debug.composition.type=dyn
-debug.overlayui.enable=1
-ro.sf.lcd_density=240
-dalvik.vm.heapsize=36m
+ro.sf.compbypass.enable=1
 dev.pm.dyn_samplingrate=1
 
+sys.zte.core.manual=0
 
-#
-# system props for the cne module
-#
-persist.cne.UseCne=none
-persist.cne.UseSwim=false
-persist.cne.bat.range.low.med=30
-persist.cne.bat.range.med.high=60
-persist.cne.loc.policy.op=/system/etc/OperatorPolicy.xml
-persist.cne.loc.policy.user=/system/etc/UserPolicy.xml
-persist.cne.bwbased.rat.sel=false
-persist.cne.snsr.based.rat.mgt=false
-persist.cne.bat.based.rat.mgt=false
-persist.cne.rat.acq.time.out=30000
-persist.cne.rat.acq.retry.tout=0
-persist.cne.nsrm.mode=false
+ro.sf.lcd_density=240
 
-ro.hdmi.enable=true
-lpa.decode=true
-lpa.use-stagefright=true
+#ZTE_CHANGE_E kyungmin.jun@lge.com 2011.12.19  LPA Mode off ==> 2012.02.-1 LPA Mode ON
+#lpa.use-stagefright=true
 
 #system props for the MM modules
 
@@ -109,13 +50,12 @@ media.stagefright.enable-aac=true
 media.stagefright.enable-qcp=true
 media.stagefright.enable-fma2dp=true
 media.stagefright.enable-scan=true
+
 #
 # system props for the data modules
 #
 ro.use_data_netmgrd=true
-ro.data.large_tcp_window_size=true
-mobiledata.interfaces=wlan0,rmnet0
-persist.data.ds_fmc_app.mode=1
+persist.data.netmgrd.qos.enable=true
 
 #system props for time-services
 persist.timed.enable=true
@@ -125,6 +65,9 @@ persist.audio.fluence.mode=endfire
 persist.audio.vr.enable=false
 persist.audio.handset.mic=analog
 
+# System prop to select audio resampler quality
+af.resampler.quality=255
+
 #
 # system prop for opengles version
 #
@@ -132,49 +75,42 @@ persist.audio.handset.mic=analog
 ro.opengles.version=131072
 
 #
-# system prop for Bluetooth SAP Profile
-#
-ro.qualcomm.bluetooth.sap=false
-
-# system prop for Bluetooth FTP profile
-ro.qualcomm.bluetooth.ftp=false
-#
-# system property for Bluetooth Handsfree Profile version
-#
-ro.bluetooth.hfp.ver=1.5
-#
-#system prop for Bluetooth hci transport
+# system prop for Bluetooth
+ro.qualcomm.bluetooth.dun=false
+ro.qualcomm.bluetooth.ftp=true
+ro.qualcomm.bluetooth.hfp.wbs=true
 ro.qualcomm.bt.hci_transport=smd
-#
-# system prop for requesting Master role in incoming Bluetooth connection.
-#
-ro.bluetooth.request.master=true
-#
-# system prop for Bluetooth Auto connect for remote initated connections
-#
+ro.bluetooth.request.master=false
 ro.bluetooth.remote.autoconnect=true
 
-#system prop for switching gps driver to qmi
+#
+# System prop for switching gps driver to qmi
+#
 persist.gps.qmienabled=true
 
-
-# Fix issue of tunning LCD backlight by web browser
-power.webview.DM=false
-
-# Not play shutter sound in silent mode
-ro.camera.sound.forced=0
+#
+# System property for cabl
+#
+ro.qualcomm.cabl=2
 
 #
-persist.sys.usb.menu=enable
-ro.config.sec_storage=1
-persist.radio.reset_on_switch=0
-persist.radio.apm_sim_not_pwdn=1
-ro.vendor.extension_library=/system/lib/libqc-opt.so
-ro.com.google.clientidbase.ms=android-boost-us
-ro.com.google.clientidbase.yt=android-boost-us
-ro.com.google.clientidbase.am=android-boost-us
-ro.com.google.clientidbase.gmm=android-boost-us
-ro.cdma.home.operator.numeric=311870
-ro.cdma.home.operator.alpha=Boost Mobile
-ro.telephony.default_network=8
-persist.radio.add_power_save=1
+# System prop for sending transmit power request to RIL during WiFi hotspot on/off
+#
+ro.ril.transmitpower=true
+
+ro.hwui.text_cache_width=2048
+ro.nfc.port=I2C
+persist.data_netmgrd_mtu=1428
+ro.config.vc_call_vol_steps=9
+ro.config.vc_call_vol_default=5
+ro.hdmi.enable=true
+com.qc.hardware=true
+com.qc.hdmi_out=true
+wlan.chip.vendor=qcom
+wlan.chip.version=wcnss
+#lpa.decode=true
+
+wifi.interface=wlan0
+ro.crypto.fuse_sdcard=true
+dalvik.vm.dexopt-data-only=1
+

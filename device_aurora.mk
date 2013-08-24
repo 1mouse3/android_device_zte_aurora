@@ -130,16 +130,6 @@ PRODUCT_COPY_FILES += \
     device/ZTE/aurora/prebuilt/etc/init.qcom.wifi.sh:/system/etc/init.qcom.wifi.sh \
     device/ZTE/aurora/prebuilt/etc/init.wlan-on-off.sh:/system/etc/init.wlan-on-off.sh
 
-# 2nd-init
-PRODUCT_COPY_FILES += \
-    device/ZTE/aurora/prebuilt/xbin/2nd-init:/system/xbin/2nd-init \
-    device/ZTE/aurora/prebuilt/xbin/cm10.sh:/system/xbin/cm10.sh \
-    device/ZTE/aurora/prebuilt/xbin/cm10.tar:/system/xbin/cm10.tar \
-    device/ZTE/aurora/prebuilt/xbin/mksh2:/system/xbin/mksh2 \
-    device/ZTE/aurora/prebuilt/xbin/recovery.sh:/system/xbin/recovery.sh \
-    device/ZTE/aurora/prebuilt/xbin/recovery.tar:/system/xbin/recovery.tar \
-    device/ZTE/aurora/prebuilt/xbin/taskset:/system/xbin/taskset
-
 # vold config
 PRODUCT_COPY_FILES += \
     device/ZTE/aurora/prebuilt/etc/vold.fstab:system/etc/vold.fstab

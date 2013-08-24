@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<apns count="3">
-  <apn name="INTERNET" numeric="311870" mcc="311" mnc="870" apn="internet.boost" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="" mmsc="" type="default,supl" />
-  <apn name="MMS" numeric="311870" mcc="311" mnc="870" apn="internet.boost" user="" server="" password="" proxy="" port="" mmsproxy="68.28.31.7" mmsport="80" mmsprotocol="" mmsc="http://mm.myboostmobile.com" type="mms" />
-  <apn name="IMSIODT" numeric="311870" mcc="311" mnc="870" apn="imsiodt.boost" user="" server="" password="" proxy="" port="" mmsproxy="" mmsport="" mmsprotocol="" mmsc="" type="ims" />
-</apns>

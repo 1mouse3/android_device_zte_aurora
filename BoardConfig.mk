@@ -1,3 +1,4 @@
+
 # Copyright (C) 2009 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,94 +20,39 @@
 # included in a build is to use PRODUCT_PACKAGES in a product
 # definition file).
 #
-
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-# Flags
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DZTEE_MSM8960
+USE_CAMERA_STUB := true
+
+# inherit from the proprietary version
+-include vendor/zte/aurora/BoardConfigVendor.mk
+
+# inherit from common msm8960
+-include device/zte/msm8960-common/BoardConfigCommon.mk
+TARGET_NO_BOOTLOADER := true
+TARGET_BOOTLOADER_BOARD_NAME := hayes
 
 # Include path
-TARGET_SPECIFIC_HEADER_PATH := device/ZTE/aurora/include
+TARGET_SPECIFIC_HEADER_PATH := device/zte/aurora/include
+# Init
+TARGET_PROVIDES_INIT_RC := true
 
-# Kernel
+BOARD_KERNEL_CMDLINE :=androidboot.hardware=qcom user_debug=31 loglevel=7 kgsl.mmutype=gpummu
 BOARD_KERNEL_BASE := 0x80200000
-BOARD_KERNEL_PAGE_SIZE := 2048
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 loglevel=7 kgsl.mmutype=gpummu
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
+BOARD_KERNEL_PAGESIZE := 2048
 
-TARGET_PREBUILT_KERNEL := device/ZTE/aurora/kernel
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
-
-# Platform
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := msm8960
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-TARGET_PRODUCT := aurora_BOOST_US
-
-# Architecture
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
-
-### 4.2.1 / 4.2.2 Changes By DM47021 ###
-TARGET_CPU_VARIANT := krait
-TARGET_QCOM_DISPLAY_VARIANT := legacy
-BOARD_EGL_NEEDS_LEGACY_FB := true
-# Linaro OPTIMIZATIONS By DM47021
-TARGET_USE_O3 := true
-TARGET_USE_GRAPHITE := true
-TARGET_USE_LINARO_STRING_ROUTINES := true
-########################################
-
-
-# Krait optimizations
-TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
-TARGET_USE_KRAIT_PLD_SET := true
-TARGET_KRAIT_BIONIC_PLDOFFS := 10
-TARGET_KRAIT_BIONIC_PLDTHRESH := 10
-TARGET_KRAIT_BIONIC_BBTHRESH := 64
-TARGET_KRAIT_BIONIC_PLDSIZE := 64
-
-# QCOM hardware
-BOARD_USES_QCOM_HARDWARE := true
-
-# Graphics
-COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK -DQCOM_ROTATOR_KERNEL_FORMATS
-USE_OPENGL_RENDERER := true
-TARGET_NO_HW_VSYNC := true
-TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_ION := true
-BOARD_EGL_CFG := device/ZTE/aurora/prebuilt/lib/egl/egl.cfg
-
-# PMEM compatibility
-BOARD_NEEDS_MEMORYHEAPPMEM := true
-
-# ICS proprietary blob compatibility
-COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
-
-# Audio
-TARGET_QCOM_AUDIO_VARIANT := caf
-BOARD_USES_ALSA_AUDIO := true
-BOARD_USES_SEPERATED_AUDIO_INPUT := true
-TARGET_USES_ION_AUDIO := true
-
-# Lights
-TARGET_PROVIDES_LIBLIGHTS := true
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/ZTE/aurora/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/zte/aurora/bluetooth
+
+# Audio
+BOARD_USES_FLUENCE_INCALL := true
+BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -117,12 +63,16 @@ BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_MODULE_NAME := wlan
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Filesystem
-TARGET_USERIMAGES_USE_EXT4 := true
+# QCOM GPS
+#BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := aurora
+
+# fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 587202560
@@ -130,19 +80,25 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 318767104
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2617245696
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 25165824
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_VOLD_MAX_PARTITIONS := 97
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_SUPPRESS_EMMC_WIPE := true
 
-# Webkit
-ENABLE_WEBGL := true
-TARGET_FORCE_CPU_UPLOAD := true
+TARGET_PROVIDES_LIBLIGHTS := true
+TARGET_PREBUILT_KERNEL := device/zte/aurora/kernel
 
-# Preload bootanimation
-TARGET_BOOTANIMATION_PRELOAD := true
+# Kernel
+TARGET_KERNEL_SOURCE := kernel/zte/aurora
+TARGET_KERNEL_CONFIG := aurora_defconfig
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
-
-# Releasetools
-#TARGET_PROVIDES_RELEASETOOLS := true
-#TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/ZTE/aurora/releasetools/aurora_ota_from_target_files
+#BOARD_HAS_NO_SELECT_BUTTON := true
+# Use this flag if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
+CM_RELEASE := true
+BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := false
+BOARD_VOLD_MAX_PARTITIONS := 36
+# Graphics
+COMMON_GLOBAL_CFLAGS += -DQCOM_ROTATOR_KERNEL_FORMATS
 

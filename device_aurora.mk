@@ -163,7 +163,7 @@ PRODUCT_PACKAGES += \
 	libtilerenderer
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilts/lib/libI420colorconvert.so:system/lib/libI420colorconvert.so
+	#$(LOCAL_PATH)/prebuilts/lib/libI420colorconvert.so:system/lib/libI420colorconvert.so
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

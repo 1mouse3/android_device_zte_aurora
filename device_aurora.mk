@@ -42,6 +42,10 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/ramdisk/logo.bmp:root/logo.bmp \
         $(LOCAL_PATH)/ramdisk/sbin/usbconfig:root/sbin/usbconfig
 
+# Recovery
+PRODUCT_PACKAGES += \
+    extract_elf_ramdisk
+
 #LLVM for RenderScript
 LLVM_ROOT_PATH := external/llvm
 
@@ -323,6 +327,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	mobiledata.interfaces = wlan0,rmnet0 \
         dalvik.vm.dexopt-data-only=1
 
+$(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
+
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_aurora
 PRODUCT_DEVICE := aurora
+
+

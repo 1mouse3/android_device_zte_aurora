@@ -2,7 +2,7 @@
 # inherit from the proprietary version
 -include vendor/zte/aurora/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH += device/zte/aurora/include
+#TARGET_SPECIFIC_HEADER_PATH += device/zte/aurora/include
 
 TARGET_PROVIDES_INIT_RC := true
 
@@ -19,7 +19,7 @@ TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_ARCU_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := krait
 TARGET_CPU_SMP := true
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
@@ -86,6 +86,7 @@ TARGET_USES_SF_BYPASS := true
 TARGET_USES_OVERLAY := true
 BOARD_USES_HWCOMPOSER := true
 TARGET_NO_HW_VSYNC := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # FM Radio
 #BOARD_HAVE_FM_RADIO := true
@@ -158,8 +159,11 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_USES_MMCUTILS := true
 BOARD_SUPPRESS_EMMC_WIPE := true
-BOARD_HAS_SDCARD_INTERNAL := true
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/vold/179:33
+BOARD_HAS_SDCARD_INTERNAL := true 
+#BOARD_HAS_SDCARD_EXTERNAL := true 
+BOARD_SDEXT_DEVICE := /dev/platform/msm_sdcc.3/mmc_host
+BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
@@ -168,14 +172,41 @@ BOARD_RECOVERY_HANDLES_MOUNT := true
 BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/aurora/recovery/kernel
 BOARD_CUSTOM_GRAPHICS := ../../../device/zte/aurora/recovery/graphics.c
-TARGET_RECOVERY_FSTAB = device/zte/aurora/recovery.fstab
-RECOVERY_FSTAB_VERSION = 1
+TARGET_RECOVERY_FSTAB = device/zte/aurora/fstab.aurora
+RECOVERY_FSTAB_VERSION = 2
+
+#TWRP flags
+DEVICE_RESOLUTION := 460x800
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_FLASH_FROM_STORAGE := true
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+#TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/msm_sdcc.1/by-name/Userdata"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,barrier=1,noauto_da_alloc,discard"
+TW_CRYPTO_FS_FLAGS := "0x00000406"
+TW_CRYPTO_KEY_LOC := "footer"
+TW_INCLUDE_FUSE_EXFAT := true
+TW_BOARD_CUSTOM_GRAPHICS := ../../../device/zte/aurora/recovery/graphics.c
+TW_MAX_BRIGHTNESS := 255
+TW_NO_USB_STORAGE := true
 
 # USB
 #BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/aurora/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+#BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+
+# Vold
+BOARD_VOLD_MAX_PARTITIONS := 20
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
 
 # default props
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0

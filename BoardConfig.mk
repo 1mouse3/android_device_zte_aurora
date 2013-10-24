@@ -141,7 +141,6 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 2048
 
 TARGET_PREBUILT_KERNEL := device/zte/aurora/kernel
-TARGET_KERNEL_SOURCE := kernel/zte/aurora
 TARGET_KERNEL_CONFIG := aurora_defconfig
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 
@@ -158,22 +157,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_USES_MMCUTILS := true
-BOARD_SUPPRESS_EMMC_WIPE := true
-BOARD_HAS_SDCARD_INTERNAL := true 
-#BOARD_HAS_SDCARD_EXTERNAL := true 
-BOARD_SDEXT_DEVICE := /dev/platform/msm_sdcc.3/mmc_host
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 
 # Recovery
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_RECOVERY_HANDLES_MOUNT := true
-BOARD_HAS_DOWNLOAD_MODE := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/aurora/recovery/kernel
-BOARD_CUSTOM_GRAPHICS := ../../../device/zte/aurora/recovery/graphics.c
-TARGET_RECOVERY_FSTAB = device/zte/aurora/fstab.aurora
-RECOVERY_FSTAB_VERSION = 2
+BOARD_HAS_NO_SELECT_BUTTON := true
 
 #TWRP flags
 DEVICE_RESOLUTION := 460x800
@@ -199,22 +187,20 @@ TW_NO_USB_STORAGE := true
 
 # USB
 #BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/aurora/UsbController.cpp
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 #BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
-TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+#TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
 
 # default props
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=0
 ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
 ADDITIONAL_DEFAULT_PROPERTIES += persist.service.adb.enable=1
-ADDITIONAL_DEFAULT_PROPERTIES += ro.config.sec_storage=1
-ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mass_storage,adb
 
 #TARGET_PROVIDES_RELEASETOOLS := true
 #TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/zte/aurora/releasetools/aurora_ota_from_target_files

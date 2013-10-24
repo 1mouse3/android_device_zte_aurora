@@ -29,22 +29,22 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, $(LOCAL_PATH)/prebuilts/lib/modules/modules.mk)
 
 ## Ramdisk
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/ramdisk/init:root/init \
-        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
-        $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-        $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
-        $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
-        $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
-        $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
-        $(LOCAL_PATH)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
-        $(LOCAL_PATH)/ramdisk/ueventd.rc:root/ueventd.qcom.rc \
-        $(LOCAL_PATH)/ramdisk/logo.bmp:root/logo.bmp \
-        $(LOCAL_PATH)/ramdisk/sbin/usbconfig:root/sbin/usbconfig
+#PRODUCT_COPY_FILES += \
+#        $(LOCAL_PATH)/ramdisk/init:root/init \
+#        $(LOCAL_PATH)/ramdisk/init.rc:root/init.rc \
+#        $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+#        $(LOCAL_PATH)/ramdisk/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+#        $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
+#        $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
+#       $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
+#        $(LOCAL_PATH)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
+#        $(LOCAL_PATH)/ramdisk/ueventd.rc:root/ueventd.qcom.rc \
+#        $(LOCAL_PATH)/ramdisk/logo.bmp:root/logo.bmp \
+#        $(LOCAL_PATH)/ramdisk/sbin/usbconfig:root/sbin/usbconfig
 
 # Recovery
-PRODUCT_PACKAGES += \
-    extract_elf_ramdisk
+#PRODUCT_PACKAGES += \
+#    extract_elf_ramdisk
 
 #LLVM for RenderScript
 LLVM_ROOT_PATH := external/llvm

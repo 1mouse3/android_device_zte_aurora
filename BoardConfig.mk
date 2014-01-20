@@ -8,9 +8,10 @@ TARGET_SPECIFIC_HEADER_PATH += device/zte/aurora/include
 TARGET_PROVIDES_INIT_RC := true
 
 # Platform
-TARGET_BOOTLOADER_BOARD_NAME := hayes
+TARGET_BOOTLOADER_BOARD_NAME := aurora
 TARGET_BOARD_PLATFORM := msm8960
-BOARD_VENDOR_PLATFORM := aurora
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno220
+BOARD_VENDOR_PLATFORM := zte
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 BOARD_HAS_NO_MISC_PARTITION := true
@@ -26,6 +27,8 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 318767104
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2617245696
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 25165824
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+TARGET_USERIMAGES_USE_EXT4 := true
 
 # Architecture
 TARGET_ARCH := arm
@@ -53,7 +56,7 @@ BOARD_KERNEL_BASE := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/zte/aurora
-TARGET_KERNEL_CONFIG := aurora_defconfig
+TARGET_KERNEL_CONFIG := msm8960-hayes_defconfig
 
 # Dumpstate
 #BOARD_LIB_DUMPSTATE := libdumpstate.sony
@@ -150,7 +153,7 @@ TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/aurora/recovery/kernel
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # TWRP flags
-DEVICE_RESOLUTION := 720x1280
+DEVICE_RESOLUTION := 460x800
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_HAS_NO_RECOVERY_PARTITION := true
@@ -180,33 +183,33 @@ TW_NO_USB_STORAGE := true
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
-#BOARD_SEPOLICY_DIRS += \
-#    device/zte/aurora/sepolicy
+BOARD_SEPOLICY_DIRS += \
+    device/zte/aurora/sepolicy
 
-#BOARD_SEPOLICY_UNION += \
-#    file_contexts \
-#    property_contexts \
-#    te_macros \
-#    bluetooth_loader.te \
-#    bridge.te \
-#    camera.te \
-#    device.te \
-#    dhcp.te \
-#    domain.te \
-#    drmserver.te \
-#    file.te \
-#    kickstart.te \
-#    init.te \
-#    mac_update.te \
-#    mediaserver.te \
-#    mpdecision.te \
-#    netmgrd.te \
-#    qmux.te \
-#    rild.te \
-#    rmt.te \
-#    surfaceflinger.te \
-#    system.te \
-#    tee.te \
-#    thermald.te \
-#    ueventd.te \
-#    wpa_supplicant.te
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    property_contexts \
+    te_macros \
+    bluetooth_loader.te \
+    bridge.te \
+    camera.te \
+    device.te \
+    dhcp.te \
+    domain.te \
+    drmserver.te \
+    file.te \
+    kickstart.te \
+    init.te \
+    mac_update.te \
+    mediaserver.te \
+    mpdecision.te \
+    netmgrd.te \
+    qmux.te \
+    rild.te \
+    rmt.te \
+    surfaceflinger.te \
+    system.te \
+    tee.te \
+    thermald.te \
+    ueventd.te \
+    wpa_supplicant.te
